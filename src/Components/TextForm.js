@@ -3,18 +3,31 @@ import React, {useState} from 'react'
 
 export default function TextForm(props) {
     const handleUPclick=()=>{
+        if (c===0){
+            props.showAlert("Enter the text to convert","danger ");
+        }
+        else{
         let newText = text.toUpperCase();
         setText(newText);
         props.showAlert("Converted to UpperCase!","success ");
+        }
     }
     const handleLWclick=()=>{
+        if (c===0){
+            props.showAlert("Enter the text to convert","danger ");
+        }
+        else{
         let newText = text.toLowerCase();
         setText(newText);
-        props.showAlert("Converted to LowerCase!","success ");
+        props.showAlert("Converted to LowerCase!","success ");}
     }
     const handleINclick=()=>{
         let word = text.split(" ");
         let newText = '';
+        if (c===0){
+            props.showAlert("Enter the text to convert","danger ");
+        }
+        else{
         for(let i=0;i<word.length;i++){
             if (i===word.length-1){
                 newText += word[i].charAt(0).toUpperCase()+word[i].slice(1); 
@@ -24,23 +37,32 @@ export default function TextForm(props) {
             }
         }
         setText(newText);
-        props.showAlert("Converted to Title Case!","success ");
+        props.showAlert("Converted to Title Case!","success ");}
     }
     const handleclearclick=()=>{
         let newText = "";
         setText(newText);
         props.showAlert("Text is cleared!","success ");
+        setC(0);
     }
     const handleExtraSpaces=()=>{
+        if (c===0){
+            props.showAlert("Enter the text to be changed","danger ");
+        }
+        else{
         let newText = text.split(/[ ]+/);
         setText(newText.join(" "));
-        props.showAlert("Extra spaces are removed!","success ");
+        props.showAlert("Extra spaces are removed!","success ");}
     }
     const handleCopy=()=>{
+        if (c===0){
+            props.showAlert("Enter the text to copy","danger ");
+        }
+        else{
         var newText = document.getElementById("TextBox");
         newText.select();
         navigator.clipboard.writeText(newText.value);
-        props.showAlert("Copied to clipboard!","success ");
+        props.showAlert("Copied to clipboard!","success ");}
     }
     const handleONchange=(event)=>{
         setText(event.target.value);
@@ -67,12 +89,14 @@ export default function TextForm(props) {
         <label for="TextBox" className="form-label"><h3>{props.heading}</h3></label>
         <textarea className="form-control" value={text} onChange={handleONchange} style={{backgroundColor:props.mode==='dark'?'black':'white',color:props.mode==='dark'?'white':'black'}} id="TextBox" rows="8"/>
     </div>
-        <button className="btn btn-primary mx-1" onClick={handleUPclick}>Convert to Uppercase</button>
-        <button className="btn btn-primary mx-1" onClick={handleLWclick}>Convert to Lowercase</button>
-        <button className="btn btn-primary mx-1" onClick={handleINclick}>Title Case</button>
-        <button className="btn btn-primary mx-1" onClick={handleCopy}>Copy Text</button>
+    <div className='Buttons'>
+        <button className="btn btn-primary mx-1 mt-lg-1 mt-xs-5 " onClick={handleUPclick}>Uppercase</button>
+        <button className="btn btn-primary mx-1 mt-lg-1 mt-xs-5" onClick={handleLWclick}>Lowercase</button>
+        <button className="btn btn-primary mx-1" onClick={handleINclick}>Titlecase</button>
+        <button className="btn btn-primary mx-1" onClick={handleCopy}>Copy</button>
         <button className="btn btn-primary mx-1" onClick={handleExtraSpaces}>Remove Extra spaces</button>
-        <button className="btn btn-primary mx-1" onClick={handleclearclick}>Clear Text</button>
+        <button className="btn btn-primary mx-1" onClick={handleclearclick}>Clear</button>
+    </div>
     </div>
     <div className="container my-3" style={{color:props.mode==='dark'?'white':'black'}}>
         <h3>Your text Summary</h3>

@@ -6,6 +6,10 @@
   height: 40vmin;
   pointer-events: none;
 }
+.Buttons{
+display: flex;
+flex-direction: row;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -39,4 +43,16 @@
 
 .blank{
   color: rgb(98, 40, 40);
+}
+@media screen and (max-width: 765px) {
+  .Buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+    .Buttons button{
+      margin-top: 10px;
+      margin-bottom: 5px;
+      width: 60%;
+      }
 }
